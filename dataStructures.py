@@ -26,7 +26,7 @@ class Problem:
         self.initial-state #estado inicial
         
     def nextStates(): #Uma função que aplicada a um estadogera uma lista com todos os estados que podem ser atingidos à partir desse
-        pass
+         pass
 
     def isGoal(): #Uma função que permite identificar um estado objectivo em que o jogo terminou
         pass
