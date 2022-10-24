@@ -12,8 +12,39 @@ class Track:
     
     def orderlistofcoordinates(): #Função que serve para comprarar estruturas do tipo track.
         pass 
+    
+    def setEndPositions(self,matriz):
+        self.endpositions.append(matriz)
 
-    def readTrack(): #Função que serve para ler o ficheiro .txt e transformar em "env" ou "track".
+    def setStartPos(self,*valores):
+        for x in valores:
+            self.size.append(x)
+
+    def setSize(self,*valores):
+        for x in valores:
+            self.size.append(x)
+    
+    def startPista(self):
+        Track.setEnv(self)
+        "Damos o tamanho da pista"
+        Track.setSize(self,len(self.env))
+        Track.setSize(self,len(self.env[0]))
+        "Damos o tamanho da pista"
+        for i in range(len(self.env)):
+            for j in range(len(self.env[0])):
+                linha = []
+                if(self.env[i][j]=="E"):
+                    linha.append(i)
+                    linha.append(j)
+                    self.setEndPositions(linha)
+                if(self.env[i][j]=="S"):
+                    self.setStartPos(i)
+                    self.setStartPos(j)
+
+    
+
+    def readTrack(): 
+        #Função que serve para ler o ficheiro .txt e transformar em "env" ou "track".
         arqname= input("Caro usuário, insira o nome do arquivo:")
         f = open(arqname,"r")
         matriz = []

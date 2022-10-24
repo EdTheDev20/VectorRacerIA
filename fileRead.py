@@ -1,5 +1,7 @@
 from msilib import datasizemask
 import dataStructures 
 pista = dataStructures.Track()
-pista.setEnv()
-pista.printEnv()
+pista.startPista()
+print(pista.startpos)
+print(pista.endpositions)
+print(pista.size)
