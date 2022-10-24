@@ -1,16 +1,44 @@
+from pickle import TRUE
 class Track:
     def __init__(self):
-        self.size = [] #Tamanho da pista, contem uma lista com dois elementos. Ou seja, o número das linhas e o número das colunas da matriz
-        self.env = [] #Uma lista de listas em que os obstáculos são representados por "NIL" e o espaço que pode ser percorrido é representado por "T"
+        self.size = [] #Tamanho da pista, contem uma lista com dois elementos. Ou seja, o número das linhas e o número das colunas da matriz.
+        self.env #Uma lista de listas em que os obstáculos são representados por "NIL" e o espaço que pode ser percorrido é representado por "T"
         self.startpos = [] #Uma lista que representa a posição inicial. Ex: [linha-5,coluna-5]
         self.endpositions = []
         #Representada por uma lista de posições, ou seja, pode ser uma lista de listas com as respectivas posições da meta ou a finish line.
-
-    def orderlistofcoordinates(): #Função que serve para comprarar estruturas do tipo track
+    
+    def orderlistofcoordinates(): #Função que serve para comprarar estruturas do tipo track.
         pass 
 
-    def readTrack(): #Função que serve para ler o ficheiro .txt e transformar em "env" ou "track"
-        pass 
+    def readTrack(): #Função que serve para ler o ficheiro .txt e transformar em "env" ou "track".
+        arqname= input("Caro usuário, insira o nome do arquivo:")
+        f = open(arqname,"r")
+        matriz = []
+        while TRUE:
+            linha = f.readline()
+            if(""==linha):
+                break
+            mlinha = []
+            for x in linha:
+               if(x!="\n"):
+                    mlinha.append(x)
+            matriz.append(mlinha)
+        return matriz
+
+    def setSize(self,value): 
+        self.size.append(value)
+
+    def setStartPos(self,value):
+        self.startpos.append(value)
+
+    def setEndPositions(self,value):
+        self.endpositions.append(value)
+    
+    def setEnv(self):
+        self.env = Track.readTrack()
+    
+    
+    
 
 class State: #Estado do Carro
     def __init__(self):
@@ -23,7 +51,7 @@ class State: #Estado do Carro
 
 class Problem:
     def __init__(self):
-        self.initial-state #estado inicial
+        self.initialState #estado inicial
         
     def nextStates(): #Uma função que aplicada a um estadogera uma lista com todos os estados que podem ser atingidos à partir desse
          pass
