@@ -2,7 +2,7 @@ from pickle import TRUE
 class Track:
     def __init__(self):
         self.size = [] #Tamanho da pista, contem uma lista com dois elementos. Ou seja, o número das linhas e o número das colunas da matriz.
-        self.env #Uma lista de listas em que os obstáculos são representados por "NIL" e o espaço que pode ser percorrido é representado por "T"
+        self.env 
         self.startpos = [] #Uma lista que representa a posição inicial. Ex: [linha-5,coluna-5]
         self.endpositions = []
         #Representada por uma lista de posições, ou seja, pode ser uma lista de listas com as respectivas posições da meta ou a finish line.
