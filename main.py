@@ -266,15 +266,21 @@ def DFS(estadoInicial:State,maxDepth,visitados:list):
 
     Stack = nextStates(estadoInicial) #Gerar os nós vizinhos ou ''filhos''
     print("Tamanho da Stack:",len(Stack))
+ #--------------------------EXTRAIR A DIFERENÇA-------------------------------#
     Diferenca = []
-    for naFila in Stack:
-        for nosVisitados in visitados:
-            if (not isEqual(naFila,nosVisitados)):
-                Diferenca.append
+    for i in range(len(Stack)): 
+        flag = 0
+        for j in range(len(visitados)):
+            if(isEqual(Stack[i],visitados[j])):
+                flag+=1
+        if(flag<=0):
+            Diferenca.append(Stack[i])
+  #--------------------------EXTRAIR A DIFERENÇA-------------------------------#
+      
     print("Tamanho da diferença:",len(Diferenca))
     for elemento in Diferenca:
-        print("Chegamos na av da div")
-        if(DFS(elemento,maxDepth,visitados)):
+        print("Elemento da divisao, posicao:",elemento.pos)
+        if(DFS(elemento,(maxDepth-1),visitados)):
             return True
     return False
            
@@ -283,6 +289,7 @@ def DFS(estadoInicial:State,maxDepth,visitados:list):
 def iterativeDDFS(estadoInicial,maxDepth):
     random = []
     for i in range(maxDepth):
+        print("-------DEPTH NÚMERO:---------",i)
         if(DFS(estadoInicial,i,random)):
             return True
     return False
@@ -310,7 +317,7 @@ non_goal_state1 = make_state((5,7), (-1,2), (-1,0), 1, track)
 print("------TESTE-------")
 estados= nextStates(non_goal_state)
 
-if not (iterativeDDFS(non_goal_state,5)):
+if not (iterativeDDFS(non_goal_state,4)):
     print("N encontrei")
 else:
     print("Encontrei")
