@@ -1,0 +1,27 @@
+def nextStates(state):  # Uma função que dado um estado, devolve uma lista dos estados seguintes possíveis
+
+    actions = [(0, 0), (0, 1), (0, -1), (1, 0), (-1, 0), (1, 1), (-1, 1), (1, -1), (-1, -1)]
+    copy = state
+    estados = []
+
+
+    for j in range(len(actions)):
+        state = copy
+        action = actions[j]
+
+        # conversão de tupla para listas para calcular as novas posições
+        vel = list(state.vel)
+        pos = list(state.pos)
+
+        vel[0] = vel[0] + action[0]
+        vel[1] = vel[1] + action[1]
+
+        pos[0] = pos[0] + vel[0]
+        pos[1] = pos[1] + vel[1]
+
+
+        if isObstaclep(tuple(pos), state.track) == False:
+            estados.append(tuple(pos))
+
+
+    return estados

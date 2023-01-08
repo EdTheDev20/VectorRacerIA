@@ -1,0 +1,23 @@
+def compute_heuristic(state):
+
+    copyH = 900
+
+    if (state.track.env[state.pos[0]][state.pos[1]] == "X"):
+        h = '<M>'
+    elif (state.track.env[state.pos[0]][state.pos[1]] == "E"):
+        h = 0
+    else:
+        # para vários pontos de chegada, calcular e depois ir verificando a medida que se calcula qual é o menor
+        for x in range(len(state.track.endpositions)):
+            h = abs(state.pos[0] - state.track.endpositions[x][0]) + abs(state.pos[1] - state.track.endpositions[x][1])
+            h = math.sqrt(
+                math.pow(state.pos[0] - state.track.endpositions[x][0], 2) + math.pow(state.pos[1] - state.track.endpositions[x][1],
+                                                                           2))
+            if (h < copyH):
+                copyH = h
+            else:
+                h = copyH
+
+            h = int(h)
+
+    return h
