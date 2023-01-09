@@ -250,19 +250,21 @@ def compute_heuristic(state):
 
 
 
-def DFS(estadoInicial:State,maxDepth,visitados:list):
+def DFS(estadoInicial:State,maxDepth,visitados:list,percorridoAteAgora:list):
     print("Chegamos no DFS do elemento:",estadoInicial.pos)
     print("Length dos visitados:",len(visitados))
     if (len(visitados)==0): #Se o tamanho da lista dos visitados significa que está vazia, logo iniciamos a lista
         visitados=[]
-    
+
     visitados.append(estadoInicial) #fazemos um append do estado atual na lista
    
     if(isGoalp(estadoInicial)): #Se estivermos no objectivo, mostramos o objectivo !
-        return True
+        percorridoAteAgora.append(estadoInicial)
+        return percorridoAteAgora
 
     if(maxDepth<=0): #Se estivermos na profundida máxima, retornamos a lista
-         return False
+         semObj = []
+         return semObj #Condição de falha
 
     Stack = nextStates(estadoInicial) #Gerar os nós vizinhos ou ''filhos''
     print("Tamanho da Stack:",len(Stack))
@@ -280,19 +282,25 @@ def DFS(estadoInicial:State,maxDepth,visitados:list):
     print("Tamanho da diferença:",len(Diferenca))
     for elemento in Diferenca:
         print("Elemento da divisao, posicao:",elemento.pos)
-        if(DFS(elemento,(maxDepth-1),visitados)):
-            return True
-    return False
+        percorridoAteAgora.append(estadoInicial)
+        p = DFS(elemento,(maxDepth-1),visitados,percorridoAteAgora)
+        if p:
+            return p
+    semObj = []
+    return semObj #Condição de falha
            
 
 
 def iterativeDDFS(estadoInicial,maxDepth):
     random = []
+    random2 = []
     for i in range(maxDepth):
-        print("-------DEPTH NÚMERO:---------",i)
-        if(DFS(estadoInicial,i,random)):
-            return True
-    return False
+        print("-------DEPTH NÚMERO:---------",i)      
+        df = DFS(estadoInicial,i,random,random2)
+        if df:
+            return df
+    falha = []
+    return falha
 
 
 # print(path)
@@ -304,8 +312,9 @@ def iterativeDDFS(estadoInicial,maxDepth):
 # track.printEnv()
 
 #print(nextStates(state))
-
+track2= loadTrack("track1.txt")
 track = loadTrack("track0.txt")
+non_goal_state3=make_state((3,1),(1,2),(1,-1),-100,track2)
 test_state=  make_state((3,16), (1,3), (1,-1), -100, track)
 goal_state = make_state((3,16), (1,3), (1,-1), -100, track)
 goal_state1 = make_state((4,16), (1,3), (1,-1), -100, track)
@@ -316,8 +325,11 @@ non_goal_state1 = make_state((5,7), (-1,2), (-1,0), 1, track)
 # astar_search(state)
 print("------TESTE-------")
 estados= nextStates(non_goal_state)
-
-if not (iterativeDDFS(non_goal_state,4)):
+iterativo = iterativeDDFS(non_goal_state,10)
+if (len(iterativo)<=0):
     print("N encontrei")
 else:
-    print("Encontrei")
+    print("--------CAMINHO PERCORRIDO:------------")
+    print("")
+    for elemento in iterativo:
+        print("-------->",elemento.pos)
